@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -34,6 +35,14 @@ import java.util.Properties;
 @ComponentScan("com.makos.mvctodolist")
 @Configuration
 public class Config implements WebMvcConfigurer {
+
+    public static final String PREFIX = "/WEB-INF/view/";
+    public static final String SUFFIX = ".html";
+    public static final String DOMAIN_PACKAGE = "com.makos.mvctodolist.domain";
+    public static final String HIBERNATE_DIALECT = "hibernate.dialect";
+    public static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+    public static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
+    public static final String HIBERNATE_HBM_2_DDL_AUTO = "hibernate.hbm2ddl.auto";
 
     private final ApplicationContext applicationContext;
 
@@ -61,12 +70,17 @@ public class Config implements WebMvcConfigurer {
     @Value("${hibernate.hbm2ddl_auto}")
     private String HBM2DDL;
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/img/**").addResourceLocations("/img/");
+    }
+
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/view/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setPrefix(PREFIX);
+        templateResolver.setSuffix(SUFFIX);
         return templateResolver;
     }
 
@@ -99,10 +113,10 @@ public class Config implements WebMvcConfigurer {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", DIALECT);
-        properties.put("hibernate.show_sql", SHOW_SQL);
-        properties.put("hibernate.format_sql", FORMAT_SQL);
-        properties.put("hibernate.hbm2ddl.auto", HBM2DDL);
+        properties.put(HIBERNATE_DIALECT, DIALECT);
+        properties.put(HIBERNATE_SHOW_SQL, SHOW_SQL);
+        properties.put(HIBERNATE_FORMAT_SQL, FORMAT_SQL);
+        properties.put(HIBERNATE_HBM_2_DDL_AUTO, HBM2DDL);
 
         return properties;
     }
@@ -111,7 +125,7 @@ public class Config implements WebMvcConfigurer {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.makos.mvctodolist.domain");
+        em.setPackagesToScan(DOMAIN_PACKAGE);
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
