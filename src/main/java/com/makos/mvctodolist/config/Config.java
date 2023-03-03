@@ -1,5 +1,6 @@
 package com.makos.mvctodolist.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -28,7 +29,7 @@ import java.util.Properties;
 
 @RequiredArgsConstructor
 
-@PropertySource("classpath:hibernate.properties")
+@PropertySource("classpath:app-config.properties")
 @EnableTransactionManagement
 @EnableWebMvc
 @EnableJpaRepositories("com.makos.mvctodolist.dao")
@@ -36,13 +37,7 @@ import java.util.Properties;
 @Configuration
 public class Config implements WebMvcConfigurer {
 
-    public static final String PREFIX = "/WEB-INF/view/";
-    public static final String SUFFIX = ".html";
     public static final String DOMAIN_PACKAGE = "com.makos.mvctodolist.domain";
-    public static final String HIBERNATE_DIALECT = "hibernate.dialect";
-    public static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
-    public static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
-    public static final String HIBERNATE_HBM_2_DDL_AUTO = "hibernate.hbm2ddl.auto";
 
     private final ApplicationContext applicationContext;
 
@@ -67,8 +62,8 @@ public class Config implements WebMvcConfigurer {
     @Value("${hibernate.connection.driver_class}")
     private String DRIVER_CLASS;
 
-    @Value("${hibernate.hbm2ddl_auto}")
-    private String HBM2DDL;
+    @Value("${liquibase.path.changelog}")
+    private String RELATIVE_PATH_TO_CHANGELOG_XML;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -79,8 +74,9 @@ public class Config implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix(PREFIX);
-        templateResolver.setSuffix(SUFFIX);
+        templateResolver.setPrefix("/WEB-INF/view/");
+        templateResolver.setSuffix(".html");
+
         return templateResolver;
     }
 
@@ -89,6 +85,7 @@ public class Config implements WebMvcConfigurer {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
+
         return templateEngine;
     }
 
@@ -113,10 +110,10 @@ public class Config implements WebMvcConfigurer {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put(HIBERNATE_DIALECT, DIALECT);
-        properties.put(HIBERNATE_SHOW_SQL, SHOW_SQL);
-        properties.put(HIBERNATE_FORMAT_SQL, FORMAT_SQL);
-        properties.put(HIBERNATE_HBM_2_DDL_AUTO, HBM2DDL);
+
+        properties.put("hibernate.dialect", DIALECT);
+        properties.put("hibernate.show_sql", SHOW_SQL);
+        properties.put("hibernate.format_sql", FORMAT_SQL);
 
         return properties;
     }
@@ -140,5 +137,14 @@ public class Config implements WebMvcConfigurer {
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
         return transactionManager;
+    }
+
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:" + RELATIVE_PATH_TO_CHANGELOG_XML);
+        liquibase.setDataSource(dataSource());
+
+        return liquibase;
     }
 }
