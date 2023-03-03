@@ -1,7 +1,7 @@
 package com.makos.mvctodolist.controller;
 
 import com.makos.mvctodolist.domain.Status;
-import com.makos.mvctodolist.domain.Task;
+import com.makos.mvctodolist.dto.TaskDTO;
 import com.makos.mvctodolist.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,12 +26,12 @@ public class TaskController {
     @GetMapping
     public String index(@RequestParam(required = false) Integer page,
                         @RequestParam(required = false) Integer size,
-                        @ModelAttribute("task") Task task,
+                        @ModelAttribute("task") TaskDTO taskDTO,
                         Model model) {
         page = isNull(page) ? PAGE_NUMBER_DEFAULT : page;
         size = isNull(size) ? PAGE_SIZE_DEFAULT : size;
 
-        Page<Task> taskPage = taskService.findAll(PageRequest.of(page, size));
+        Page<TaskDTO> taskPage = taskService.findAll(PageRequest.of(page, size));
         model.addAttribute("tasks", taskPage.getContent());
         model.addAttribute("pages", taskPage.getTotalPages());
         model.addAttribute("statusElements", Status.values());
@@ -39,8 +39,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public String createTask(@ModelAttribute("task") Task task) {
-        taskService.save(task);
+    public String createTask(@ModelAttribute("task") TaskDTO taskDTO) {
+        taskService.save(taskDTO);
         return "redirect: /tasks";
     }
 
@@ -54,17 +54,17 @@ public class TaskController {
 
     @PutMapping("/{id}")
     public String updateTask(@PathVariable Integer id,
-                             @ModelAttribute("task") Task task) {
-        task.setId(id);
-        taskService.update(task);
+                             @ModelAttribute("task") TaskDTO taskDTO) {
+        taskDTO.setId(id);
+        taskService.update(taskDTO);
         return "redirect: /tasks";
     }
 
     @DeleteMapping("/{id}")
     public String deleteTask(@PathVariable Integer id,
-                             @ModelAttribute("task") Task task) {
-        task.setId(id);
-        taskService.delete(task);
+                             @ModelAttribute("task") TaskDTO taskDTO) {
+        taskDTO.setId(id);
+        taskService.delete(taskDTO);
         return "redirect: /tasks";
     }
 }

@@ -1,19 +1,19 @@
 package com.makos.mvctodolist.service;
 
-import com.makos.mvctodolist.domain.Task;
+import com.makos.mvctodolist.dto.TaskDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 public interface TaskService {
 
-    Task findById(Integer id);
+    TaskDTO findById(Integer id);
 
-    Page<Task> findAll(PageRequest pageRequest);
+    Page<TaskDTO> findAll(PageRequest pageRequest);
 
-    void save(Task task);
+    void save(TaskDTO taskDTO);
 
-    void update(Task task);
+    void update(TaskDTO taskDTO);
 
-    void delete(Task task);
+    void delete(TaskDTO taskDTO);
 
 }
