@@ -41,7 +41,7 @@ public class TaskController {
     @PostMapping
     public String createTask(@ModelAttribute("task") TaskDTO taskDTO) {
         taskService.save(taskDTO);
-        return "redirect: /tasks";
+        return "redirect: todo/tasks";
     }
 
     @GetMapping("/{id}")
@@ -57,7 +57,7 @@ public class TaskController {
                              @ModelAttribute("task") TaskDTO taskDTO) {
         taskDTO.setId(id);
         taskService.update(taskDTO);
-        return "redirect: /tasks";
+        return "redirect: todo/tasks";
     }
 
     @DeleteMapping("/{id}")
@@ -65,6 +65,6 @@ public class TaskController {
                              @ModelAttribute("task") TaskDTO taskDTO) {
         taskDTO.setId(id);
         taskService.delete(taskDTO);
-        return "redirect: /tasks";
+        return "redirect: todo/tasks";
     }
 }
