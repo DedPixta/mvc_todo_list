@@ -27,10 +27,11 @@ Task management application for Spring MVC technology practice
 docker compose up
 ```
 4. The application will download all dependencies and create a docker container. Docker container will be launched automatically
-5. After the successful completion of the previous point, the application will be available at the link
+5. After the successful completion of the previous point, the application will be available at the link:
 ```
-http://localhost:8080/todo
+http://localhost:8080/todo/tasks
 ```
+
 ![image](https://user-images.githubusercontent.com/101488434/222964221-319c05be-6491-4c40-9590-8270fb3b3c20.png)
 
 ## Technologies used
