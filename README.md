@@ -20,11 +20,18 @@ Task management application for Spring MVC technology practice
 
 
 ## To run project
-1. Make sure you have docker installed and ports 8080, 3306 are free
-2. Open a command line in the location where the application is installed and run the command:
+1. Download the project and extract it
+2. Make sure you have installed docker and ports 8080, 3306 are free
+3. Open a command line in the location where the application is installed and run the command:
 ```
 docker compose up
 ```
+4. The application will download all dependencies and create a docker container. Docker container will be launched automatically
+5. After the successful completion of the previous point, the application will be available at the link
+```
+http://localhost:8080/todo
+```
+![image](https://user-images.githubusercontent.com/101488434/222964221-319c05be-6491-4c40-9590-8270fb3b3c20.png)
 
 ## Technologies used
 - Spring (Core, Data, MVC)
