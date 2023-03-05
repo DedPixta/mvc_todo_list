@@ -35,6 +35,8 @@ http://localhost:8080/todo
 
 ## Technologies used
 - Spring (Core, Data, MVC)
+- Thymeleaf
+- Liquibase
 - Lombok
 - Mapstruct
 - Hibernate validator
