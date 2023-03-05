@@ -9,16 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de16643d-109f-4a07-a1aa-5ea4f410d7b6" name="Changes" comment="added liquibase">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="de16643d-109f-4a07-a1aa-5ea4f410d7b6" name="Changes" comment="added TaskNotFoundExceptionHandler + logger">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/error/handler/ExceptionHandlerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/config/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/controller/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app-config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app-config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/task/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/task/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/task/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/task/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/error/TaskNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/error/TaskNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/service/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/makos/mvctodolist/service/TaskServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -99,7 +98,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;web.server&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;7aa05b9bf1e0cb0c252c5ce11efb5ff0&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -240,7 +239,12 @@
       <workItem from="1677817047254" duration="17058000" />
       <workItem from="1677913407211" duration="1217000" />
       <workItem from="1677926551713" duration="7361000" />
-      <workItem from="1677934850756" duration="7281000" />
+      <workItem from="1677934850756" duration="7307000" />
+      <workItem from="1677948249194" duration="763000" />
+      <workItem from="1677949619601" duration="56000" />
+      <workItem from="1677989733984" duration="3031000" />
+      <workItem from="1677992788787" duration="4092000" />
+      <workItem from="1677997844647" duration="163000" />
     </task>
     <task id="LOCAL-00001" summary="start project">
       <created>1677680557279</created>
@@ -284,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677829360205</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added docker-compose">
+      <created>1677944246839</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1677944246839</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,6 +319,8 @@
     <MESSAGE value="added CRUD operations, edit page for task" />
     <MESSAGE value="added TaskDTO, TaskMapper" />
     <MESSAGE value="added liquibase" />
-    <option name="LAST_COMMIT_MESSAGE" value="added liquibase" />
+    <MESSAGE value="added docker-compose" />
+    <MESSAGE value="added TaskNotFoundExceptionHandler + logger" />
+    <option name="LAST_COMMIT_MESSAGE" value="added TaskNotFoundExceptionHandler + logger" />
   </component>
 </project>

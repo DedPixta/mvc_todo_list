@@ -76,7 +76,6 @@ public class Config implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
-
         return templateResolver;
     }
 
@@ -85,7 +84,6 @@ public class Config implements WebMvcConfigurer {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
-
         return templateEngine;
     }
 
@@ -99,22 +97,18 @@ public class Config implements WebMvcConfigurer {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
         dataSource.setDriverClassName(Objects.requireNonNull(DRIVER_CLASS));
         dataSource.setUrl(URL);
         dataSource.setUsername(USERNAME);
         dataSource.setPassword(PASSWORD);
-
         return dataSource;
     }
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-
         properties.put("hibernate.dialect", DIALECT);
         properties.put("hibernate.show_sql", SHOW_SQL);
         properties.put("hibernate.format_sql", FORMAT_SQL);
-
         return properties;
     }
 
@@ -127,7 +121,6 @@ public class Config implements WebMvcConfigurer {
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(hibernateProperties());
-
         return em;
     }
 
@@ -135,7 +128,6 @@ public class Config implements WebMvcConfigurer {
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-
         return transactionManager;
     }
 
@@ -144,7 +136,6 @@ public class Config implements WebMvcConfigurer {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setChangeLog("classpath:" + RELATIVE_PATH_TO_CHANGELOG_XML);
         liquibase.setDataSource(dataSource());
-
         return liquibase;
     }
 }

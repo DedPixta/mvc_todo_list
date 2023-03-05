@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskDTO findById(Integer id) {
         return taskDAO.findById(id)
                 .map(TaskMapper.INSTANCE::mapToTaskDTO)
-                .orElseThrow(TaskNotFoundException::new);
+                .orElseThrow(() -> new TaskNotFoundException("Not found task with ID - " + id));
     }
 
     @Override
@@ -52,6 +52,4 @@ public class TaskServiceImpl implements TaskService {
         Task task = TaskMapper.INSTANCE.mapToTask(taskDTO);
         taskDAO.delete(task);
     }
-
-
 }

@@ -4,6 +4,7 @@ import com.makos.mvctodolist.domain.Status;
 import com.makos.mvctodolist.dto.TaskDTO;
 import com.makos.mvctodolist.service.TaskService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import static java.util.Objects.isNull;
 
 @AllArgsConstructor
 
+@Slf4j
 @Controller
 @RequestMapping("/tasks")
 public class TaskController {
@@ -41,7 +43,7 @@ public class TaskController {
     @PostMapping
     public String createTask(@ModelAttribute("task") TaskDTO taskDTO) {
         taskService.save(taskDTO);
-        return "redirect: todo/tasks";
+        return "redirect:/tasks";
     }
 
     @GetMapping("/{id}")
@@ -57,7 +59,7 @@ public class TaskController {
                              @ModelAttribute("task") TaskDTO taskDTO) {
         taskDTO.setId(id);
         taskService.update(taskDTO);
-        return "redirect: todo/tasks";
+        return "redirect:/tasks";
     }
 
     @DeleteMapping("/{id}")
@@ -65,6 +67,6 @@ public class TaskController {
                              @ModelAttribute("task") TaskDTO taskDTO) {
         taskDTO.setId(id);
         taskService.delete(taskDTO);
-        return "redirect: todo/tasks";
+        return "redirect:/tasks";
     }
 }
