@@ -2,6 +2,7 @@ package com.makos.mvctodolist.config;
 
 import liquibase.integration.spring.SpringLiquibase;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -106,9 +107,9 @@ public class Config implements WebMvcConfigurer {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", DIALECT);
-        properties.put("hibernate.show_sql", SHOW_SQL);
-        properties.put("hibernate.format_sql", FORMAT_SQL);
+        properties.put(Environment.DIALECT, DIALECT);
+        properties.put(Environment.SHOW_SQL, SHOW_SQL);
+        properties.put(Environment.FORMAT_SQL, FORMAT_SQL);
         return properties;
     }
 
