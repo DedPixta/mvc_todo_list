@@ -1,4 +1,4 @@
-package com.makos.mvctodolist.error.handler;
+package com.makos.mvctodolist.controller.handler;
 
 import com.makos.mvctodolist.error.TaskNotFoundException;
 import lombok.extern.slf4j.Slf4j;
